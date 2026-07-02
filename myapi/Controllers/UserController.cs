@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using myapi.Data;
 using myapi.Models;
-using myapi.DTOs;
+using myapi.DTOs.User;
+using myapi.Services.Interfaces;
 
 namespace myapi.Controllers;
 
@@ -14,46 +15,25 @@ namespace myapi.Controllers;
 [Route("api/[controller]")]
 public class UserController : ControllerBase
 {
-    private readonly AppDbContext _context;
+    private readonly IUserService _userService;
 
-    public UserController(AppDbContext context)
+    public UserController(IUserService userService)
     {
-        _context = context;
+        _userService = userService;
     }
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<User>>> GetUsers()
     {
-        // return await _context.Users.ToListAsync();
-        var users = await _context.Users.Select(u => new UserDto
-        {
-            Id = u.Id,
-            Name = u.Name,
-            Email = u.Email,
-            CreatedAt = u.CreatedAt,
-            UpdatedAt = u.UpdatedAt,
-            IsAdmin = u.IsAdmin
-        })
-        .ToListAsync();
-
+        var users = await _userService.GetUsersAsync();
         return Ok(users);
     }
 
     [HttpGet("{id}")]
     public async Task<ActionResult<User>> GetUser(int id)
     {
-        var user = await _context.Users.Where(u => u.Id == id)
-            .Select(u => new UserDto
-            {
-                Id = u.Id,
-                Name = u.Name,
-                Email = u.Email,
-                CreatedAt = u.CreatedAt,
-                UpdatedAt = u.UpdatedAt,
-                IsAdmin = u.IsAdmin
-            })
-            .FirstOrDefaultAsync();
-        
+        var user = await _userService.GetUserByIdAsync(id);
+
         if (user == null)
         {
             return NotFound();
@@ -65,48 +45,20 @@ public class UserController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<UserDto>> CreateUser(CreateUserDto createUserDto)
     {
-        var user = new User
-        {
-            Name = createUserDto.Name,
-            Email = createUserDto.Email,
-            Password = createUserDto.Password,
-            CreatedAt = DateTime.UtcNow,
-            UpdatedAt = DateTime.UtcNow,
-            IsAdmin = true
-        };
+        var user = await _userService.CreateUserAsync(createUserDto);
 
-        _context.Users.Add(user);
-        await _context.SaveChangesAsync();
-
-        return CreatedAtAction(nameof(GetUsers),
-            new { id = user.Id },
-            new UserDto
-            {
-                Id = user.Id,
-                Name = user.Name,
-                Email = user.Email,
-                CreatedAt = user.CreatedAt,
-                UpdatedAt = user.UpdatedAt,
-                IsAdmin = user.IsAdmin
-            });
+        return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
     }
 
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateUser(int id, UpdateUserDto dto)
     {
-        var user = await _context.Users.FindAsync(id);
+        var updated = await _userService.UpdateUserAsync(id, dto);
 
-        if (user == null)
+        if (!updated)
         {
             return NotFound();
         }
-
-        user.Name = dto.Name;
-        user.Email = dto.Email;
-        user.Password = dto.Password;
-        user.UpdatedAt = DateTime.UtcNow;
-
-        await _context.SaveChangesAsync();
 
         return NoContent();
     }
@@ -114,15 +66,12 @@ public class UserController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteUser(int id)
     {
-        var user = await _context.Users.FindAsync(id);
+        var deleted = await _userService.DeleteUserAsync(id);
 
-        if (user == null)
+        if (!deleted)
         {
             return NotFound();
         }
-
-        _context.Users.Remove(user);
-        await _context.SaveChangesAsync();
 
         return NoContent();
     }
