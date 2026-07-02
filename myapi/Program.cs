@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using myapi.Data;
+using myapi.Repositories;
+using myapi.Repositories.Interfaces;
 using myapi.Services;
 using myapi.Services.Interfaces;
 
@@ -13,6 +15,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("MyDB")));
 

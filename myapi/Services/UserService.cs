@@ -6,55 +6,58 @@ using Microsoft.EntityFrameworkCore;
 using myapi.Data;
 using myapi.DTOs.User;
 using myapi.Models;
+using myapi.Repositories.Interfaces;
 using myapi.Services.Interfaces;
 
 namespace myapi.Services
 {
     public class UserService : IUserService
     {
-        private readonly AppDbContext _context;
+        private readonly IUserRepository _repository;
         
-        public UserService(AppDbContext context)
+        public UserService(IUserRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         public async Task<IEnumerable<UserDto>> GetUsersAsync()
         {
-            return await _context.Users
-                .Select(u => new UserDto
-                {
-                    Id = u.Id,
-                    Name = u.Name,
-                    Email = u.Email,
-                    CreatedAt = u.CreatedAt,
-                    UpdatedAt = u.UpdatedAt,
-                    IsAdmin = u.IsAdmin
-                })
-                .ToListAsync();
+            var users = await _repository.GetUsersAsync();
+
+            return users.Select(u => new UserDto
+            {
+                Id = u.Id,
+                Name = u.Name,
+                Email = u.Email,
+                CreatedAt = u.CreatedAt,
+                UpdatedAt = u.UpdatedAt,
+                IsAdmin = u.IsAdmin
+            });
         }
 
         public async Task<UserDto?> GetUserByIdAsync(int id)
         {
-            var user = await _context.Users
-                .Where(u => u.Id == id)
-                .Select(u => new UserDto
-                {
-                    Id = u.Id,
-                    Name = u.Name,
-                    Email = u.Email,
-                    CreatedAt = u.CreatedAt,
-                    UpdatedAt = u.UpdatedAt,
-                    IsAdmin = u.IsAdmin
-                })
-                .FirstOrDefaultAsync();
+            var user = await _repository.GetUserByIdAsync(id);
 
-            return user;
+            if (user == null)
+            {
+                return null;
+            }
+
+            return new UserDto
+            {
+                Id = user.Id,
+                Name = user.Name,
+                Email = user.Email,
+                CreatedAt = user.CreatedAt,
+                UpdatedAt = user.UpdatedAt,
+                IsAdmin = user.IsAdmin
+            };
         }
 
         public async Task<UserDto> CreateUserAsync(CreateUserDto dto)
         {
-            var exists = await _context.Users.AnyAsync(u => u.Email == dto.Email);
+            var exists = await _repository.ExistsByEmailAsync(dto.Email);
 
             if (exists)
             {
@@ -71,8 +74,8 @@ namespace myapi.Services
                 IsAdmin = false // Default to non-admin
             };
 
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
+            await _repository.AddUserAsync(user);
+            await _repository.SaveChangesAsync();
 
             return new UserDto
             {
@@ -87,14 +90,14 @@ namespace myapi.Services
 
         public async Task<bool> UpdateUserAsync(int id, UpdateUserDto dto)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user = await _repository.GetUserByIdAsync(id);
 
             if (user == null)
             {
                 return false;
             }
 
-            var exists = await _context.Users.AnyAsync(u => u.Email == dto.Email && u.Id != id);
+            var exists = await _repository.EmailExistForOtherUserAsync(dto.Email, id);
 
             if (exists)
             {
@@ -105,23 +108,23 @@ namespace myapi.Services
             user.Email = dto.Email;
             user.UpdatedAt = DateTime.UtcNow;
 
-            _context.Users.Update(user);
-            await _context.SaveChangesAsync();
+            await _repository.UpdateUserAsync(user);
+            await _repository.SaveChangesAsync();
 
             return true;
         }
 
         public async Task<bool> DeleteUserAsync(int id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user = await _repository.GetUserByIdAsync(id);
 
             if (user == null)
             {
                 return false;
             }
 
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
+            await _repository.DeleteUserAsync(user);
+            await _repository.SaveChangesAsync();
 
             return true;
         }
