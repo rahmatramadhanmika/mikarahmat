@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "FvRcMk9UR+E=",
+  "dgSpecHash": "Z07p0JrRtrw=",
   "success": true,
   "projectFilePath": "D:\\portofoliomikarahmat\\backend\\myapi\\myapi.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\mikar\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\mikar\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\mikar\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\mikar\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.9\\microsoft.aspnetcore.openapi.10.0.9.nupkg.sha512",
     "C:\\Users\\mikar\\.nuget\\packages\\microsoft.build.framework\\18.0.2\\microsoft.build.framework.18.0.2.nupkg.sha512",
@@ -40,6 +42,18 @@
     "C:\\Users\\mikar\\.nuget\\packages\\system.composition.typedparts\\9.0.0\\system.composition.typedparts.9.0.0.nupkg.sha512"
   ],
   "logs": [
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "message": "Package 'AutoMapper' 12.0.1 has a known high severity vulnerability, https://github.com/advisories/GHSA-rvv3-g6hj-g44x",
+      "projectPath": "D:\\portofoliomikarahmat\\backend\\myapi\\myapi.csproj",
+      "warningLevel": 1,
+      "filePath": "D:\\portofoliomikarahmat\\backend\\myapi\\myapi.csproj",
+      "libraryId": "AutoMapper",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    },
     {
       "code": "NU1903",
       "level": "Warning",

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using myapi.Data;
 using myapi.DTOs.User;
@@ -13,26 +14,20 @@ namespace myapi.Services
 {
     public class UserService : IUserService
     {
+        private readonly IMapper _mapper;
         private readonly IUserRepository _repository;
         
-        public UserService(IUserRepository repository)
+        public UserService(IUserRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         public async Task<IEnumerable<UserDto>> GetUsersAsync()
         {
             var users = await _repository.GetUsersAsync();
 
-            return users.Select(u => new UserDto
-            {
-                Id = u.Id,
-                Name = u.Name,
-                Email = u.Email,
-                CreatedAt = u.CreatedAt,
-                UpdatedAt = u.UpdatedAt,
-                IsAdmin = u.IsAdmin
-            });
+            return _mapper.Map<IEnumerable<UserDto>>(users);
         }
 
         public async Task<UserDto?> GetUserByIdAsync(int id)
@@ -44,15 +39,7 @@ namespace myapi.Services
                 return null;
             }
 
-            return new UserDto
-            {
-                Id = user.Id,
-                Name = user.Name,
-                Email = user.Email,
-                CreatedAt = user.CreatedAt,
-                UpdatedAt = user.UpdatedAt,
-                IsAdmin = user.IsAdmin
-            };
+            return _mapper.Map<UserDto>(user);
         }
 
         public async Task<UserDto> CreateUserAsync(CreateUserDto dto)
@@ -64,28 +51,12 @@ namespace myapi.Services
                 throw new Exception("Email already exists.");
             }
 
-            var user = new User
-            {
-                Name = dto.Name,
-                Email = dto.Email,
-                Password = dto.Password, // In a real application, hash the password before storing it
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow,
-                IsAdmin = false // Default to non-admin
-            };
+            var user = _mapper.Map<User>(dto);
 
             await _repository.AddUserAsync(user);
             await _repository.SaveChangesAsync();
 
-            return new UserDto
-            {
-                Id = user.Id,
-                Name = user.Name,
-                Email = user.Email,
-                CreatedAt = user.CreatedAt,
-                UpdatedAt = user.UpdatedAt,
-                IsAdmin = user.IsAdmin
-            };
+            return _mapper.Map<UserDto>(user);
         }
 
         public async Task<bool> UpdateUserAsync(int id, UpdateUserDto dto)
@@ -104,8 +75,8 @@ namespace myapi.Services
                 throw new Exception("Email already exists.");
             }
 
-            user.Name = dto.Name;
-            user.Email = dto.Email;
+            _mapper.Map(dto, user);
+
             user.UpdatedAt = DateTime.UtcNow;
 
             await _repository.UpdateUserAsync(user);

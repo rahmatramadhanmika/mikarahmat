@@ -1,4 +1,3 @@
-D:\portofoliomikarahmat\backend\myapi\bin\Debug\net10.0\appsettings.Development.json
 D:\portofoliomikarahmat\backend\myapi\bin\Debug\net10.0\appsettings.json
 D:\portofoliomikarahmat\backend\myapi\bin\Debug\net10.0\dotnet-tools.json
 D:\portofoliomikarahmat\backend\myapi\bin\Debug\net10.0\myapi.staticwebassets.endpoints.json
@@ -125,3 +124,5 @@ D:\portofoliomikarahmat\backend\myapi\obj\Debug\net10.0\refint\myapi.dll
 D:\portofoliomikarahmat\backend\myapi\obj\Debug\net10.0\myapi.pdb
 D:\portofoliomikarahmat\backend\myapi\obj\Debug\net10.0\myapi.genruntimeconfig.cache
 D:\portofoliomikarahmat\backend\myapi\obj\Debug\net10.0\ref\myapi.dll
+D:\portofoliomikarahmat\backend\myapi\bin\Debug\net10.0\AutoMapper.dll
+D:\portofoliomikarahmat\backend\myapi\bin\Debug\net10.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
