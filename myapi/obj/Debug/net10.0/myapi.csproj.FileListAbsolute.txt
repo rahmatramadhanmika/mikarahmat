@@ -126,3 +126,4 @@ D:\portofoliomikarahmat\backend\myapi\obj\Debug\net10.0\myapi.genruntimeconfig.c
 D:\portofoliomikarahmat\backend\myapi\obj\Debug\net10.0\ref\myapi.dll
 D:\portofoliomikarahmat\backend\myapi\bin\Debug\net10.0\AutoMapper.dll
 D:\portofoliomikarahmat\backend\myapi\bin\Debug\net10.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\portofoliomikarahmat\backend\myapi\bin\Debug\net10.0\appsettings.example.json

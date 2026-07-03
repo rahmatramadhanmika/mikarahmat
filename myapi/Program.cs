@@ -5,6 +5,7 @@ using myapi.Repositories.Interfaces;
 using myapi.Services;
 using myapi.Services.Interfaces;
 using myapi.Mappings;
+using myapi.Exceptions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +33,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseMiddleware<GlobalExceptionMidleware>();
 app.MapControllers();
 
 app.Run();

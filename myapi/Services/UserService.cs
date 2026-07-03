@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using myapi.Data;
 using myapi.DTOs.User;
+using myapi.Exceptions;
 using myapi.Models;
 using myapi.Repositories.Interfaces;
 using myapi.Services.Interfaces;
@@ -36,7 +37,7 @@ namespace myapi.Services
 
             if (user == null)
             {
-                return null;
+                throw new NotFoundException($"User with ID {id} not found.");
             }
 
             return _mapper.Map<UserDto>(user);
@@ -48,7 +49,7 @@ namespace myapi.Services
 
             if (exists)
             {
-                throw new Exception("Email already exists.");
+                throw new BadRequestException("Email already exists.");
             }
 
             var user = _mapper.Map<User>(dto);
@@ -65,14 +66,14 @@ namespace myapi.Services
 
             if (user == null)
             {
-                return false;
+                throw new NotFoundException($"User with ID {id} not found.");
             }
 
             var exists = await _repository.EmailExistForOtherUserAsync(dto.Email, id);
 
             if (exists)
             {
-                throw new Exception("Email already exists.");
+                throw new BadRequestException("Email already exists.");
             }
 
             _mapper.Map(dto, user);
