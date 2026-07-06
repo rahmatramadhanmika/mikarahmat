@@ -10,6 +10,7 @@ using myapi.Exceptions;
 using myapi.Models;
 using myapi.Repositories.Interfaces;
 using myapi.Services.Interfaces;
+using Microsoft.AspNetCore.Identity;
 
 namespace myapi.Services
 {
@@ -17,11 +18,14 @@ namespace myapi.Services
     {
         private readonly IMapper _mapper;
         private readonly IUserRepository _repository;
+        private readonly IPasswordHasher<User> _passwordHasher;
         
         public UserService(IUserRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
+
+            _passwordHasher = new PasswordHasher<User>();
         }
 
         public async Task<IEnumerable<UserDto>> GetUsersAsync()
@@ -53,6 +57,8 @@ namespace myapi.Services
             }
 
             var user = _mapper.Map<User>(dto);
+
+            user.PasswordHash = _passwordHasher.HashPassword(user, dto.Password);
 
             await _repository.AddUserAsync(user);
             await _repository.SaveChangesAsync();

@@ -20,6 +20,8 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddAutoMapper(typeof(UserProfile));
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
+builder.Services.AddScoped<IAuthService, AuthService>();
+
 builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("MyDB")));
 
 var app = builder.Build();
