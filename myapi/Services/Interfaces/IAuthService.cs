@@ -9,6 +9,7 @@ namespace myapi.Services.Interfaces
 {
     public interface IAuthService
     {
-        Task<UserDto> LoginAsync(LoginDto dto);
+        Task<LoginResponseDto> LoginAsync(LoginDto dto);
+        Task<LoginResponseDto> RefreshTokenAsync(RefreshTokenDto dto);
     }
 }

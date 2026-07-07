@@ -127,3 +127,11 @@ D:\portofoliomikarahmat\backend\myapi\obj\Debug\net10.0\ref\myapi.dll
 D:\portofoliomikarahmat\backend\myapi\bin\Debug\net10.0\AutoMapper.dll
 D:\portofoliomikarahmat\backend\myapi\bin\Debug\net10.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 D:\portofoliomikarahmat\backend\myapi\bin\Debug\net10.0\appsettings.example.json
+D:\portofoliomikarahmat\backend\myapi\bin\Debug\net10.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\portofoliomikarahmat\backend\myapi\bin\Debug\net10.0\Microsoft.IdentityModel.Abstractions.dll
+D:\portofoliomikarahmat\backend\myapi\bin\Debug\net10.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\portofoliomikarahmat\backend\myapi\bin\Debug\net10.0\Microsoft.IdentityModel.Logging.dll
+D:\portofoliomikarahmat\backend\myapi\bin\Debug\net10.0\Microsoft.IdentityModel.Protocols.dll
+D:\portofoliomikarahmat\backend\myapi\bin\Debug\net10.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\portofoliomikarahmat\backend\myapi\bin\Debug\net10.0\Microsoft.IdentityModel.Tokens.dll
+D:\portofoliomikarahmat\backend\myapi\bin\Debug\net10.0\System.IdentityModel.Tokens.Jwt.dll

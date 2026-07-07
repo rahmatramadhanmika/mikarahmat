@@ -11,6 +11,7 @@ public interface IUserRepository
     Task<IEnumerable<User>> GetUsersAsync();
     Task<User?> GetUserByIdAsync(int id);
     Task<User?> GetUserByEmailAsync(string email);
+    Task<User?> GetByRefreshTokenAsync(string refreshToken);
     Task<bool> ExistsByEmailAsync(string email);
     Task<bool> EmailExistForOtherUserAsync(string email, int id);
     Task AddUserAsync(User user);

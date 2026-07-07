@@ -8,6 +8,7 @@ using myapi.Data;
 using myapi.Models;
 using myapi.DTOs.User;
 using myapi.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace myapi.Controllers;
 
@@ -22,7 +23,7 @@ public class UserController : ControllerBase
         _userService = userService;
     }
 
-    [HttpGet]
+    [HttpGet()]
     public async Task<ActionResult<IEnumerable<User>>> GetUsers()
     {
         var users = await _userService.GetUsersAsync();

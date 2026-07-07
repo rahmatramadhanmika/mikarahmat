@@ -25,5 +25,13 @@ namespace myapi.Controllers
             var user = await _authService.LoginAsync(dto);
             return Ok(user);
         }
+
+        [HttpPost("refresh")]
+        public async Task<IActionResult> RefreshToken(RefreshTokenDto dto)
+        {
+            var result = await _authService.RefreshTokenAsync(dto);
+
+            return Ok(result);
+        }
     }
 }

@@ -32,6 +32,10 @@ namespace myapi.Repositories
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
         }
+        public async Task<User?> GetByRefreshTokenAsync(string refreshToken)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.RefreshToken == refreshToken);
+        }
 
         public async Task<bool> ExistsByEmailAsync(string email)
         {
