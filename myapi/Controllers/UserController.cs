@@ -23,6 +23,7 @@ public class UserController : ControllerBase
         _userService = userService;
     }
 
+    [Authorize(Policy = "AdminOnly")]
     [HttpGet()]
     public async Task<ActionResult<IEnumerable<User>>> GetUsers()
     {
