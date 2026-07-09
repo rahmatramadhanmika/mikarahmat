@@ -98,7 +98,7 @@ namespace myapi.Services
 
             if (user == null)
             {
-                return false;
+                throw new NotFoundException($"User with ID {id} not found.");
             }
 
             await _repository.DeleteUserAsync(user);
