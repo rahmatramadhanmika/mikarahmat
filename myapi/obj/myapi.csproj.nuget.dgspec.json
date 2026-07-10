@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\portofoliomikarahmat\\backend\\myapi\\myapi.csproj": {}
+    "D:\\Portofolio Mika\\backend\\myapi\\myapi.csproj": {}
   },
   "projects": {
-    "D:\\portofoliomikarahmat\\backend\\myapi\\myapi.csproj": {
+    "D:\\Portofolio Mika\\backend\\myapi\\myapi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\portofoliomikarahmat\\backend\\myapi\\myapi.csproj",
+        "projectUniqueName": "D:\\Portofolio Mika\\backend\\myapi\\myapi.csproj",
         "projectName": "myapi",
-        "projectPath": "D:\\portofoliomikarahmat\\backend\\myapi\\myapi.csproj",
+        "projectPath": "D:\\Portofolio Mika\\backend\\myapi\\myapi.csproj",
         "packagesPath": "C:\\Users\\mikar\\.nuget\\packages\\",
-        "outputPath": "D:\\portofoliomikarahmat\\backend\\myapi\\obj\\",
+        "outputPath": "D:\\Portofolio Mika\\backend\\myapi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mikar\\AppData\\Roaming\\NuGet\\NuGet.Config"

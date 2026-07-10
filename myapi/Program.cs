@@ -27,6 +27,10 @@ builder.Services.AddScoped<IAboutService, AboutService>();
 builder.Services.AddAutoMapper(typeof(AboutProfile));
 builder.Services.AddScoped<IAboutRepository, AboutRepository>();
 
+builder.Services.AddScoped<IEducationService, EducationService>();
+builder.Services.AddAutoMapper(typeof(EducationProfile));
+builder.Services.AddScoped<IEducationRepository, EducationRepository>();
+
 builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>

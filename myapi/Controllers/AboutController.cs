@@ -18,9 +18,9 @@ namespace myapi.Controllers
     {
         private readonly IAboutService _aboutService;
 
-        public AboutController(IAboutService service)
+        public AboutController(IAboutService aboutService)
         {
-            _aboutService = service;
+            _aboutService = aboutService;
         }
 
         [HttpGet]

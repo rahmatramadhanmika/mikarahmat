@@ -16,5 +16,6 @@ namespace myapi.Data
         
         public DbSet<User> Users { get; set; }
         public DbSet<About> About { get; set; }
+        public DbSet<Education> Education { get; set; }
     }
 }
