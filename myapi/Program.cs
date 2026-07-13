@@ -31,6 +31,10 @@ builder.Services.AddScoped<IEducationService, EducationService>();
 builder.Services.AddAutoMapper(typeof(EducationProfile));
 builder.Services.AddScoped<IEducationRepository, EducationRepository>();
 
+builder.Services.AddScoped<IExperienceService, ExperienceService>();
+builder.Services.AddAutoMapper(typeof(ExperienceProfile));
+builder.Services.AddScoped<IExperienceRepository, ExperienceRepository>();
+
 builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>

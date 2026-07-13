@@ -5,19 +5,19 @@ using System.Threading.Tasks;
 
 namespace myapi.Models
 {
-    public class Education
+    public class Experience
     {
         public int Id { get; set; }
-        public string Institution { get; set; } = "";
-        public string Degree { get; set; } = "";
-        public string FieldOfStudy { get; set; } = "";
-        public string Description { get; set; } = "";
+        public string Company { get; set; } = "";
+        public string Position { get; set; } = "";
+        public string EmploymentType { get; set; } = "";
+        public string Location { get; set; } = "";
         public DateOnly? StartDate { get; set; }
         public DateOnly? EndDate { get; set; }
-        public string GPA { get; set; } = "";
-        public string Location { get; set; } = "";
-        public string LogoUrl { get; set; } = "";
         public bool IsCurrent { get; set; } = false;
+        public string Description { get; set; } = "";
+        public string CompanyLogoUrl { get; set; } = "";
+        public string CompanyWebsite { get; set; } = "";
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
     }
