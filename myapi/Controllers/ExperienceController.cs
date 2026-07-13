@@ -22,18 +22,9 @@ namespace myapi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ExperienceDto>>> GetExperience()
+        public async Task<ActionResult<IEnumerable<ExperienceDto>>> GetExperiences()
         {
             return Ok(await _experienceServie.GetExperiencesAsync());
-        }
-
-        [Authorize(Policy = "AdminOnly")]
-        [HttpPost]
-        public async Task<ActionResult<Experience>> CreateExperience (CreateExperienceDto dto)
-        {
-            var experience = await _experienceServie.CreateExperienceAsync(dto);
-
-            return CreatedAtAction(nameof(GetExperience), new { id = experience.Id }, experience);
         }
 
         [HttpGet("{id}")]
@@ -47,6 +38,15 @@ namespace myapi.Controllers
             }
 
             return Ok(experience);
+        }
+
+        [Authorize(Policy = "AdminOnly")]
+        [HttpPost]
+        public async Task<ActionResult<Experience>> CreateExperience(CreateExperienceDto dto)
+        {
+            var experience = await _experienceServie.CreateExperienceAsync(dto);
+
+            return CreatedAtAction(nameof(GetExperience), new { id = experience.Id }, experience);
         }
 
         [Authorize(Policy = "AdminOnly")]

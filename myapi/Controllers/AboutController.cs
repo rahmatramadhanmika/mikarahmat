@@ -24,18 +24,9 @@ namespace myapi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AboutDto>>> GetAbout()
+        public async Task<ActionResult<IEnumerable<AboutDto>>> GetAllAbout()
         {
             return Ok(await _aboutService.GetAboutsAsync());
-        }
-
-        [Authorize(Policy = "AdminOnly")]
-        [HttpPost]
-        public async Task<ActionResult<About>> CreateAbout(CreateAboutDto dto)
-        {
-            var about = await _aboutService.CreateAboutAsync(dto);
-
-            return CreatedAtAction(nameof(GetAbout), new { id = about.Id }, about);
         }
 
         [HttpGet("{id}")]
@@ -52,8 +43,17 @@ namespace myapi.Controllers
         }
 
         [Authorize(Policy = "AdminOnly")]
+        [HttpPost]
+        public async Task<ActionResult<About>> CreateAbout(CreateAboutDto dto)
+        {
+            var about = await _aboutService.CreateAboutAsync(dto);
+
+            return CreatedAtAction(nameof(GetAbout), new { id = about.Id }, about);
+        }
+
+        [Authorize(Policy = "AdminOnly")]
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAbout (int id, UpdateAboutDto dto)
+        public async Task<IActionResult> UpdateAbout(int id, UpdateAboutDto dto)
         {
             var updated = await _aboutService.UpdateAboutAsync(id, dto);
 

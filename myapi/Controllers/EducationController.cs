@@ -22,18 +22,9 @@ namespace myapi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<EducationDto>>> GetEducation()
+        public async Task<ActionResult<IEnumerable<EducationDto>>> GetEducations()
         {
             return Ok(await _educationService.GetEducationsAsync());
-        }
-
-        [Authorize(Policy = "AdminOnly")]
-        [HttpPost]
-        public async Task<ActionResult<Education>> CreateEducation(CreateEducationDto dto)
-        {
-            var education = await _educationService.CreateEducationAsync(dto);
-
-            return CreatedAtAction(nameof(GetEducation), new { id = education.Id }, education);
         }
 
         [HttpGet("{id}")]
@@ -47,6 +38,15 @@ namespace myapi.Controllers
             }
 
             return Ok(education);
+        }
+
+        [Authorize(Policy = "AdminOnly")]
+        [HttpPost]
+        public async Task<ActionResult<Education>> CreateEducation(CreateEducationDto dto)
+        {
+            var education = await _educationService.CreateEducationAsync(dto);
+
+            return CreatedAtAction(nameof(GetEducation), new { id = education.Id }, education);
         }
 
         [Authorize(Policy = "AdminOnly")]
