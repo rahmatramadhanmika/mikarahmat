@@ -43,7 +43,7 @@ namespace myapi.Controllers
 
         [Authorize(Policy = "AdminOnly")]
         [HttpPost]
-        public async Task<ActionResult<Skill>> CreateSkill (CreateSkillDto dto)
+        public async Task<ActionResult<SkillDto>> CreateSkill (CreateSkillDto dto)
         {
             var skill = await _skillService.CreateSkillAsync(dto);
 

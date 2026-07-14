@@ -44,7 +44,7 @@ namespace myapi.Controllers
 
         [Authorize(Policy = "AdminOnly")]
         [HttpPost]
-        public async Task<ActionResult<About>> CreateAbout(CreateAboutDto dto)
+        public async Task<ActionResult<AboutDto>> CreateAbout(CreateAboutDto dto)
         {
             var about = await _aboutService.CreateAboutAsync(dto);
 

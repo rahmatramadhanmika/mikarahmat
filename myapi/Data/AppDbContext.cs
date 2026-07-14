@@ -19,5 +19,19 @@ namespace myapi.Data
         public DbSet<Education> Education { get; set; }
         public DbSet<Experience> Experiences { get; set; }
         public DbSet<Skill> Skills { get; set; }
+        public DbSet<Project> Projects { get; set; }
+        public DbSet<ProjectSkill> ProjectSkills { get; set; }
+        public DbSet<ProjectMedia> ProjectMedias { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ProjectSkill>().HasKey(ps => new
+            {
+                ps.ProjectId,
+                ps.SkillId
+            });
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

@@ -42,7 +42,7 @@ namespace myapi.Controllers
 
         [Authorize(Policy = "AdminOnly")]
         [HttpPost]
-        public async Task<ActionResult<Education>> CreateEducation(CreateEducationDto dto)
+        public async Task<ActionResult<EducationDto>> CreateEducation(CreateEducationDto dto)
         {
             var education = await _educationService.CreateEducationAsync(dto);
 

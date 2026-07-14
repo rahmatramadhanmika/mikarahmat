@@ -42,7 +42,7 @@ namespace myapi.Controllers
 
         [Authorize(Policy = "AdminOnly")]
         [HttpPost]
-        public async Task<ActionResult<Experience>> CreateExperience(CreateExperienceDto dto)
+        public async Task<ActionResult<ExperienceDto>> CreateExperience(CreateExperienceDto dto)
         {
             var experience = await _experienceServie.CreateExperienceAsync(dto);
 
