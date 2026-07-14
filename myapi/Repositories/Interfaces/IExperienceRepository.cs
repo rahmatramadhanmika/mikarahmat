@@ -8,7 +8,7 @@ namespace myapi.Repositories.Interfaces
 {
     public interface IExperienceRepository
     {
-        Task<List<Experience>> GetAllAsync();
+        Task<IEnumerable<Experience>> GetAllAsync();
         Task<Experience?> GetByIdAsync(int id);
         Task AddAsync(Experience experience);
         Task UpdateAsync(Experience experience);

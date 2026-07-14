@@ -18,7 +18,7 @@ namespace myapi.Repositories
             _context = context;
         }
 
-        public async Task<List<About>> GetAllAsync()
+        public async Task<IEnumerable<About>> GetAllAsync()
         {
             return await _context.About.ToListAsync();
         }

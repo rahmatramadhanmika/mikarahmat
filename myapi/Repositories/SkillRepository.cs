@@ -18,7 +18,7 @@ namespace myapi.Repositories
             _context = context;
         }
 
-        public async Task<List<Skill>> GetAllAsync()
+        public async Task<IEnumerable<Skill>> GetAllAsync()
         {
             return await _context.Skills.ToListAsync();
         }
@@ -26,6 +26,13 @@ namespace myapi.Repositories
         public async Task<Skill?> GetByIdAsync(int id)
         {
             return await _context.Skills.FindAsync(id);
+        }
+
+        public async Task<IEnumerable<Skill>> GetSkillsByIdsAsync(IEnumerable<int> ids)
+        {
+            return await _context.Skills
+                .Where(s => ids.Contains(s.Id))
+                .ToListAsync();
         }
 
         public async Task AddAsync(Skill skill)

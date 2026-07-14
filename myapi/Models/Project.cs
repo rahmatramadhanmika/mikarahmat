@@ -20,6 +20,6 @@ namespace myapi.Models
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
         public ICollection<ProjectSkill> ProjectSkills { get; set; } = new List<ProjectSkill>();
 
-        public ICollection<ProjectMedia> Images { get; set; } = new List<ProjectMedia>();
+        public ICollection<ProjectMedia> ProjectMedias { get; set; } = new List<ProjectMedia>();
     }
 }

@@ -11,9 +11,9 @@ namespace myapi.Data
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
-            
+
         }
-        
+
         public DbSet<User> Users { get; set; }
         public DbSet<About> About { get; set; }
         public DbSet<Education> Education { get; set; }
@@ -30,6 +30,23 @@ namespace myapi.Data
                 ps.ProjectId,
                 ps.SkillId
             });
+
+            modelBuilder.Entity<ProjectSkill>()
+                .HasOne(ps => ps.Project)
+                .WithMany(p => p.ProjectSkills)
+                .HasForeignKey(ps => ps.ProjectId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<ProjectSkill>()
+                .HasOne(ps => ps.Skill)
+                .WithMany(s => s.ProjectSkills)
+                .HasForeignKey(ps => ps.SkillId);
+
+            modelBuilder.Entity<ProjectMedia>()
+                .HasOne(pm => pm.Project)
+                .WithMany(p => p.ProjectMedias)
+                .HasForeignKey(pm => pm.ProjectId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             base.OnModelCreating(modelBuilder);
         }

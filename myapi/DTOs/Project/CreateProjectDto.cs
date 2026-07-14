@@ -16,7 +16,7 @@ namespace myapi.DTOs.Project
         public bool IsFeatured { get; set; }
         public DateOnly? StartDate { get; set; }
         public DateOnly? EndDate { get; set; }
-        public List<SkillDto> Skills { get; set; } = [];
-        public List<ProjectMediaDto> ProjectMedias { get; set; } = [];
+        public List<int> SkillIds { get; set; } = [];
+        public List<CreateProjectMediaDto> ProjectMedias { get; set; } = [];
     }
 }

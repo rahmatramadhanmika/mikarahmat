@@ -8,7 +8,7 @@ namespace myapi.Repositories.Interfaces
 {
     public interface IAboutRepository
     {
-        Task<List<About>> GetAllAsync();
+        Task<IEnumerable<About>> GetAllAsync();
         Task<About?> GetByIdAsync(int id);
         Task AddAsync(About about);
         Task UpdateAsync(About about);
