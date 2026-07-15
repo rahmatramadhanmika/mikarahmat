@@ -22,6 +22,8 @@ namespace myapi.Data
         public DbSet<Project> Projects { get; set; }
         public DbSet<ProjectSkill> ProjectSkills { get; set; }
         public DbSet<ProjectMedia> ProjectMedias { get; set; }
+        public DbSet<Achievement> Achievements { get; set; }
+        public DbSet<AchievementMedia> AchievementMedias { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -46,6 +48,12 @@ namespace myapi.Data
                 .HasOne(pm => pm.Project)
                 .WithMany(p => p.ProjectMedias)
                 .HasForeignKey(pm => pm.ProjectId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<AchievementMedia>()
+                .HasOne(am => am.Achievement)
+                .WithMany(a => a.AchievementMedias) 
+                .HasForeignKey(am => am.AchievementId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             base.OnModelCreating(modelBuilder);
