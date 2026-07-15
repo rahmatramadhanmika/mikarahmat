@@ -39,6 +39,11 @@ builder.Services.AddScoped<ISkillService, SkillService>();
 builder.Services.AddAutoMapper(typeof(SkillProfile));
 builder.Services.AddScoped<ISkillRepository, SkillRepository>();
 
+builder.Services.AddScoped<IProjectService, ProjectService>();
+builder.Services.AddAutoMapper(typeof(ProjectProfile));
+builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
+builder.Services.AddScoped<IProjectMediaRepository, ProjectMediaRepository>();
+
 builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
