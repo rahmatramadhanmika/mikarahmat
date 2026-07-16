@@ -42,7 +42,10 @@ builder.Services.AddScoped<ISkillRepository, SkillRepository>();
 builder.Services.AddScoped<IProjectService, ProjectService>();
 builder.Services.AddAutoMapper(typeof(ProjectProfile));
 builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
-builder.Services.AddScoped<IProjectMediaRepository, ProjectMediaRepository>();
+
+builder.Services.AddScoped<IAchievementService, AchievementService>();
+builder.Services.AddAutoMapper(typeof(AchievementProfile));
+builder.Services.AddScoped<IAchievementRepository, AchievementRepository>();
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 
