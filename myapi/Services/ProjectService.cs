@@ -14,14 +14,12 @@ namespace myapi.Services
     public class ProjectService : IProjectService
     {
         private readonly IProjectRepository _projectRepository;
-        private readonly IProjectMediaRepository _projectMediaRepository;
         private readonly ISkillRepository _skillRepository;
         private readonly IMapper _mapper;
 
-        public ProjectService(IProjectRepository projectRepository, IProjectMediaRepository projectMediaRepository, ISkillRepository skillRepository, IMapper mapper)
+        public ProjectService(IProjectRepository projectRepository, ISkillRepository skillRepository, IMapper mapper)
         {
             _projectRepository = projectRepository;
-            _projectMediaRepository = projectMediaRepository;
             _skillRepository = skillRepository;
             _mapper = mapper;
         }
