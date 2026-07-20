@@ -47,6 +47,10 @@ builder.Services.AddScoped<IAchievementService, AchievementService>();
 builder.Services.AddAutoMapper(typeof(AchievementProfile));
 builder.Services.AddScoped<IAchievementRepository, AchievementRepository>();
 
+builder.Services.AddScoped<ICertificateService, CertificateService>();
+builder.Services.AddAutoMapper(typeof(CertificateProfile));
+builder.Services.AddScoped<ICertificateRepository, CertificateRepository>();
+
 builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>

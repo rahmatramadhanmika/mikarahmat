@@ -61,7 +61,6 @@ namespace myapi.Services
             }
 
             _mapper.Map(dto, experience);
-
             experience.UpdatedAt = DateTime.UtcNow;
 
             await _repository.UpdateAsync(experience);

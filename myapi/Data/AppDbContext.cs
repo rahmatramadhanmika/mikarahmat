@@ -24,6 +24,7 @@ namespace myapi.Data
         public DbSet<ProjectMedia> ProjectMedias { get; set; }
         public DbSet<Achievement> Achievements { get; set; }
         public DbSet<AchievementMedia> AchievementMedias { get; set; }
+        public DbSet<Certificate> Certificates { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
